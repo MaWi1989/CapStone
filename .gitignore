@@ -1,0 +1,4 @@
+.env
+capstone_env
+migrations
+__pycache__

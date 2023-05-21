@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container message_board">
+<div class="row">
+    <h1>Hi, {{ current_user.name }}!</h1>
+</div>
+<div class="row">
+    <h3>Recent Posts</h3>
+    <hr>
+    {% for post in posts %}
+    <p>
+   <p> {{ post.author.name }} says:</p> <b> <p>{{ post.title }}</p><br> {{ post.message }}</b>
+    <p><button type="submit" class="btn btn-primary" onclick="{{ url_for('edit_post', post_id=post.id) }}">Update Post</button> <p><button type="submit" class="btn btn-primary" onclick="url_for('delete_post', post_id=post.id)">Delete Post</button></p></p>
+    </p>
+    {% endfor %}
+    {% if prev_url %}
+    <a class="newer" href="{{ prev_url }}">Newer posts</a>
+    {% endif %}
+    {% if next_url %}
+    <a class="older" href="{{ next_url }}">Older posts</a>
+    {% endif %}
+</div>
+<div class="row message">
+    <p>Post your message here...</p>
+    {% if form %}
+    <form action="" method="post" class="message">
+        {{ form.hidden_tag() }}
+        <p>
+            <p> {{ form.title.label }}<br></p>
+            <p>{{ form.title(size=32) }}<br></p>
+            {% for error in form.title.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+
+            <p>  {{ form.message.label }}<br></p>
+            <p> {{ form.message(cols=32, rows=4) }}<br></p>
+            {% for error in form.message.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+       
+    </form>
+    {% endif %}
+    </div>
+</div>  
+{% endblock %}

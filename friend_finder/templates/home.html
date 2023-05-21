@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container home_page" style="background-image: url('static/images/kids.jpg')">
+    <div class="row home1">
+    <h1 class="welcome">Welcome to FriendFinder!</h1>
+    <h2 class="talk">Talk to your kids' friends' parents and set up playdates, etc...</h2>
+    </div>  
+    <div class="row home2">
+    <!-- <h5>Fill out this form to see a list of schools</h5> -->
+    
+        {% if form %}
+        <form action="" method="post" class="city">
+            {{ form.hidden_tag() }}
+            <p class="city">
+                {{ form.city.label }}<br>
+                {{ form.city(size=32) }}<br>
+                {% for error in form.city.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+    
+                {{ form.state.label }}<br>
+                {{ form.state(cols=32, rows=4) }}<br>
+                {% for error in form.state.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>{{ form.submit() }}</p>
+        </form>
+        {% endif %}
+        </div>  
+    </div>
+{% endblock %}
+
+
+

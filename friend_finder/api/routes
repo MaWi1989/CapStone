@@ -1,0 +1,22 @@
+import requests
+#from flask_restful import Api
+
+def see_school_list(city, state):
+    url = "https://realtor-api-for-real-estate-data.p.rapidapi.com/realtor_data/schools/"
+
+    querystring = {"city":f"{city}","state_code":f"{state}","school_level":"elementary","page":"1"}
+
+    headers = {
+	"X-RapidAPI-Key": "9b16110cdemsh97cefceb253d517p1e1aecjsn9ef744f7b15e",
+	"X-RapidAPI-Host": "realtor-api-for-real-estate-data.p.rapidapi.com"
+    }
+
+    response = requests.get(url, headers=headers, params=querystring)
+
+    data = response.json()
+
+    school_list = [school['name'] for school in data]
+    print(school_list)
+
+
+
